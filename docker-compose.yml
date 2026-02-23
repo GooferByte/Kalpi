@@ -28,7 +28,8 @@ services:
       context: ./frontend
       dockerfile: Dockerfile
       args:
-        - NEXT_PUBLIC_API_URL=http://localhost:8080
+        # Baked at build time into next.config.mjs rewrites — must be the Docker-internal URL.
+        - API_URL=http://api:8080
         - NEXT_PUBLIC_WS_URL=ws://localhost:8080
     container_name: kalpi-frontend
     ports:

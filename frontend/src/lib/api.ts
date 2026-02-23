@@ -1,6 +1,8 @@
 import type { Credentials, ExecutionMode, OrderPayload } from '@/types'
 
-const BASE = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080'
+// Use empty base so all requests go through Next.js rewrite proxy (same-origin → no CORS).
+// next.config.mjs rewrites /api/* → backend on the server side.
+const BASE = ''
 
 async function request<T>(path: string, options?: RequestInit): Promise<T> {
   const res = await fetch(`${BASE}${path}`, {

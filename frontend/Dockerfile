@@ -7,10 +7,12 @@ RUN npm install
 
 COPY . .
 
-ARG NEXT_PUBLIC_API_URL=http://localhost:8080
+# API_URL is server-side only (used by Next.js rewrites, never sent to browser).
+# In Docker: set to http://api:8080 so the Next.js server reaches the api container.
+ARG API_URL=http://localhost:8080
 ARG NEXT_PUBLIC_WS_URL=ws://localhost:8080
 
-ENV NEXT_PUBLIC_API_URL=$NEXT_PUBLIC_API_URL
+ENV API_URL=$API_URL
 ENV NEXT_PUBLIC_WS_URL=$NEXT_PUBLIC_WS_URL
 
 RUN npm run build

@@ -17,12 +17,10 @@ RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 \
     go build -ldflags="-w -s" -o /kalpi ./cmd/server
 
 # ── Stage 2: Runtime ──────────────────────────────────────────────────────────
-# Distroless image: no shell, no package manager — minimal attack surface.
-FROM gcr.io/distroless/static-debian12
+# Alpine: tiny image (~10MB) that includes wget for Docker healthchecks.
+FROM alpine:3.19
 
-# Copy timezone data and CA certs from builder
-COPY --from=builder /usr/share/zoneinfo /usr/share/zoneinfo
-COPY --from=builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
+RUN apk add --no-cache ca-certificates tzdata wget
 
 COPY --from=builder /kalpi /kalpi
 
