@@ -1,0 +1,34 @@
+# Environment — never commit real credentials
+.env
+
+# Assignment PDF
+*.pdf
+
+# Build output
+/kalpi
+/server
+
+# Node / frontend
+node_modules/
+frontend/node_modules/
+frontend/.next/
+frontend/out/
+
+# IDE & editor
+.magicodeconfig
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Go test cache
+*.test
+*.out
+
+# Temporary files
+*.tmp
+*.log
